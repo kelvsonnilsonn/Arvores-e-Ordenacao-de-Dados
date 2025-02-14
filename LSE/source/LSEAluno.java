@@ -1,25 +1,55 @@
 package source;
 
-public class LSEAluno {
-    String nomeString;
-    LSEAluno prox;
+public class LSEAluno{
+    private LSENode inicio;
+    private LSENode fim;
+    private int qtd;
 
-    public LSEAluno(){
+    public boolean isEmpty(){
+        return (this.qtd == 0);
     }
 
-    public Sting getNome(){
-        return nomeString;
+    private LSENode buscar(Aluno al) {
+        for (LSENode aux = this.inicio; aux != null; aux = aux.getProx()) {
+            if (al.compareTo(aux.getInfo()) == 0) {
+                return aux;
+            }
+        }
+        return null;
     }
 
-    public void setNome(string nome){
-        this.nomeString = nome;
+    public void exibir (String matricula){
+        Aluno procurar = new Aluno(matricula);
+        LSENode retorno = this.buscar(procurar);
+
+        if(retorno == NULL){
+            System.out.println("Aluno não encontrado.");
+        } else {
+            System.out.println("Dados do aluno:");
+            System.out.println(retorno.getInfo());
+        }
     }
 
-    public getProx(){
-        return prox;
-    }
 
-    public void setProx(LSEAluno prox){
-        this.prox = prox;
+    public void inserirInicio(Aluno al){
+        LSENode retorno = this.buscar(al);
+        LSENode novo;
+        if (retorno == NULL){
+            novo = new LSENode(al);
+
+            if(this.isEmpty() == true){
+                this.fim = novo;
+            } else {
+                novo.setProx(this.inicio);
+            }
+            
+            this.inicio = novo;
+            this.qtd++;
+
+            System.out.println("Aluno inserido");
+
+        } else {
+            System.out.println("Aluno já existe.");
+        }
     }
 }

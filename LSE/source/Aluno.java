@@ -1,16 +1,13 @@
 package source;
 
-public class Aluno{
+public class Aluno implements Comparable <Aluno> {
     private String matricula;
     private String nome;
     private double media;
     private int faltas;
 
-    public Aluno(String matricula, String nome, double media, int faltas){
+    Aluno(String matricula){
         this.matricula = matricula;
-        this.nome = nome;
-        this.media = media;
-        this.faltas = faltas;
     }
 
     public String getMatricula(){ return matricula; }
