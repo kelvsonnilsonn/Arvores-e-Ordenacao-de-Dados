@@ -1,4 +1,4 @@
-package source;
+package LSE.source;
 
 public class Aluno implements Comparable <Aluno> {
     private String matricula;

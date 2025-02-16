@@ -1,4 +1,4 @@
-package source;
+package LSE.source;
 
 public class LSENode{
     private Aluno info;

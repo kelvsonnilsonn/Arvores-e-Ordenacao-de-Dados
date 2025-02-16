@@ -1,4 +1,4 @@
-package source;
+package LSE.source;
 
 import java.util.Scanner;
 
