@@ -3,7 +3,7 @@ package LSE.source;
 import java.util.Scanner;
 
 public class LSEAluno{
-    private LSENode inicio;
+    private LSENode inicio; // inicio da lista
     private LSENode fim;
     private int qtd;
 
