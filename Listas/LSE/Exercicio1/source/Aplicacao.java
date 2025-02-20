@@ -1,4 +1,4 @@
-package LSE.source;
+package Exercicio1.source;
 
 import java.util.Scanner;
 

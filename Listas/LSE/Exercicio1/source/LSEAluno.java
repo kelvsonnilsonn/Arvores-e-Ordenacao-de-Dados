@@ -1,18 +1,18 @@
-package LSE.source;
+package Exercicio1.source;
 
 import java.util.Scanner;
 
 public class LSEAluno{
-    private LSENode inicio; // inicio da lista
-    private LSENode fim;
+    private LDENode inicio; // inicio da lista
+    private LDENode fim;
     private int qtd;
 
     public boolean isEmpty(){
         return (this.qtd == 0);
     }
 
-    private LSENode buscar(Aluno al) {
-        for (LSENode aux = this.inicio; aux != null; aux = aux.getProx()) {
+    private LDENode buscar(Aluno al) {
+        for (LDENode aux = this.inicio; aux != null; aux = aux.getProx()) {
             if (al.compareTo(aux.getInfo()) == 0) {
                 return aux;
             }
@@ -22,7 +22,7 @@ public class LSEAluno{
 
     public void alterar(String matr, Scanner scan){
         Aluno procurar = new Aluno(matr);
-        LSENode resultado = this.buscar(procurar);
+        LDENode resultado = this.buscar(procurar);
         
         int escolha;
         double media;
@@ -78,10 +78,10 @@ public class LSEAluno{
 
 
     public void inserirInicio(Aluno al){
-        LSENode retorno = this.buscar(al);
-        LSENode novo;
+        LDENode retorno = this.buscar(al);
+        LDENode novo;
         if (retorno == null){
-            novo = new LSENode(al);
+            novo = new LDENode(al);
 
             if(this.isEmpty()){
                 this.fim = novo;
@@ -100,11 +100,11 @@ public class LSEAluno{
     }
 
     public void inserirFinal(Aluno al){
-        LSENode novo;
-        LSENode resultado = this.buscar(al);
+        LDENode novo;
+        LDENode resultado = this.buscar(al);
 
         if(resultado == null){
-            novo = new LSENode(al);
+            novo = new LDENode(al);
 
             if(this.isEmpty()){
                 this.inicio = novo;
@@ -130,7 +130,7 @@ public class LSEAluno{
 
 
     public void exibirTodos(){
-        LSENode aux;
+        LDENode aux;
         
         if(this.isEmpty()){
             System.out.println("A lista está vazia.");
@@ -146,7 +146,7 @@ public class LSEAluno{
 
     public void exibir (String matricula){
         Aluno procurar = new Aluno(matricula);
-        LSENode retorno = this.buscar(procurar);
+        LDENode retorno = this.buscar(procurar);
 
         if(retorno == null){
             System.out.println("Aluno não encontrado.");
@@ -182,7 +182,7 @@ public class LSEAluno{
 
     public void removerFinal(){
 
-        LSENode aux;
+        LDENode aux;
 
         if(this.isEmpty()){
             System.out.println("A lista está vazia.");
