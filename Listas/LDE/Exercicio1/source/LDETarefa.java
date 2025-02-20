@@ -17,24 +17,49 @@ public class LDETarefa {
 
     public void inserir(Tarefa taf){
         LDENode node;
+        LDENode aux;
 
-        if(buscar(taf) == null){
-            
-            node = new LDENode(taf);
+        node = new LDENode(taf);
+        
+        if(isEmpty()){
 
+            this.inicio = node;
+            this.fim = node;
 
+        } else {
 
-            if(inicio == null){
-                this.inicio = node;
-                this.fim = node;
-                this.qtd++; 
-            } else {
+            aux = buscarPrioridade(taf);
+
+            if(aux == null){
                 this.fim.setProxNode(node);
                 this.fim = node;
                 this.fim.setProxNode(null);
+            } else {
+                if (aux.getInfo().GetTaskPriority() == taf.GetTaskPriority()){
+                    aux.setProxNode(node);
+                } else {
+                    node.setProxNode(aux);
+                    aux.setAntNode(node);
+                }
             }
         }
+        this.qtd++;
 
+    }
+
+    public void execute(){
+        if(isEmpty()){
+            System.out.println("A lista está vazia.");
+        } else {
+            if (this.inicio == this.fim){
+                this.inicio = null;
+                this.fim = null;
+            } else {
+                this.inicio = this.inicio.getProxNode();
+                this.inicio.setAntNode(null);
+            }
+        }
+        this.qtd--;
     }
 
 
@@ -43,7 +68,7 @@ public class LDETarefa {
         LDENode aux;
         for(aux = this.inicio; aux != null; aux = aux.getProxNode(), qtdTasksFinder++){
             if(aux.getInfo().getTaskName().equals(taf.getTaskName())){
-                System.out.printf("Foi encontrado %d tasks antes da task buscada.", qtdTasksFinder);
+                System.out.printf("Foi encontrado %d tasks na frente da task buscada.", qtdTasksFinder);
                 return aux;
             }
         }
@@ -58,7 +83,7 @@ public class LDETarefa {
     public LDENode buscarPrioridade(Tarefa taf){
         LDENode aux;
         for(aux = this.inicio; aux != null; aux = aux.getProxNode()){
-            if(taf.GetTaskPriority() < aux.getInfo().GetTaskPriority()){
+            if(taf.GetTaskPriority() <= aux.getInfo().GetTaskPriority()){
                 return aux;
             }
         }
