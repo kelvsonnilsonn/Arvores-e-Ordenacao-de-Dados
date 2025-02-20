@@ -2,7 +2,7 @@ package Exercicio1.source;
 
 public class LSENode{
     private Aluno info;
-    private LDENode prox;
+    private LSENode prox;
 
     LSENode(Aluno al){
         this.info = al;
@@ -11,6 +11,6 @@ public class LSENode{
     public Aluno getInfo(){ return info; }
     public void setInfo(Aluno info){ this.info = info; }
 
-    public LDENode getProx(){ return prox; }
-    public void setProx(LDENode prox){ this.prox = prox; }
+    public LSENode getProx(){ return prox; }
+    public void setProx(LSENode prox){ this.prox = prox; }
 }

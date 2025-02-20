@@ -1,6 +1,6 @@
 package Exercicio1.source;
 
-class Tarefa {
+public class Tarefa {
     private String TaskName;
     private int priority;
 

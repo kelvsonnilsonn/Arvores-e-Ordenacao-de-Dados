@@ -1,6 +1,6 @@
 package Exercicio1.source;
 
- class LDENode{
+public class LDENode{
     private LDENode ant;
     private Tarefa info;
     private LDENode prox;
