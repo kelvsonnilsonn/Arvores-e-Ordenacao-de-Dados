@@ -1,10 +1,10 @@
-package Exercicio1.source;
+package Exercicio1.source.Dados;
 
 public class Tarefa {
     private String TaskName;
     private int priority;
 
-    Tarefa(String name, int priority){
+    public Tarefa(String name, int priority){
         this.TaskName = name;
         this.priority = priority;
     }

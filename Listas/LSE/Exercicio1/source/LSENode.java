@@ -1,6 +1,8 @@
 package Exercicio1.source;
 
-public class LSENode{
+import Exercicio1.source.Dados.Aluno;
+
+class LSENode{
     private Aluno info;
     private LSENode prox;
 

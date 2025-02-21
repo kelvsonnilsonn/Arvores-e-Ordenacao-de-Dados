@@ -1,5 +1,7 @@
 package Exercicio1.source;
 
+import Exercicio1.source.Dados.Tarefa;
+
 public class LDETarefa {
     private LDENode inicio;
     private LDENode fim;

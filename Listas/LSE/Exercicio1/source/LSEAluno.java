@@ -2,6 +2,8 @@ package Exercicio1.source;
 
 import java.util.Scanner;
 
+import Exercicio1.source.Dados.Aluno;
+
 public class LSEAluno{
     private LSENode inicio; // inicio da lista
     private LSENode fim;

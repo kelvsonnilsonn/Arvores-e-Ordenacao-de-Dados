@@ -1,12 +1,12 @@
-package Exercicio1.source;
+package BinariaBusca.source.Dados;
 
-public class Aluno implements Comparable <Aluno> {
+public class Aluno implements Comparable <Aluno> { // Diz que aluno é "comparable"
     private String matricula;
     private String nome;
     private double media;
     private int faltas;
 
-    Aluno(String matricula){
+    public Aluno(String matricula){
         this.matricula = matricula;
     }
 

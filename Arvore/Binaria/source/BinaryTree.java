@@ -3,8 +3,8 @@ package Binaria.source;
 public class BinaryTree{
     private Node root;
     private Node aux;
-
-    public void insert(int value){
+    
+    public void insert(int value){ // Sem recursividade
         if(root == null){
             root = new Node(value);
         } else {

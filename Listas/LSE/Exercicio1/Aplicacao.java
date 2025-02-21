@@ -1,6 +1,9 @@
-package Exercicio1.source;
+package Exercicio1;
 
 import java.util.Scanner;
+
+import Exercicio1.source.LSEAluno;
+import Exercicio1.source.Dados.Aluno;
 
 public class Aplicacao {
     public static void main(String[] args){

@@ -1,5 +1,7 @@
 package Exercicio1.source;
 
+import Exercicio1.source.Dados.*;
+
 public class LDENode{
     private LDENode ant;
     private Tarefa info;
