@@ -38,8 +38,13 @@ public class LDETarefa {
                 if (aux.getInfo().GetTaskPriority() == taf.GetTaskPriority()){
                     aux.setProxNode(node);
                 } else {
-                    node.setProxNode(aux);
-                    aux.setAntNode(node);
+                    if(aux.getAntNode() == this.inicio){
+                        node.setProxNode(this.inicio);
+                        this.inicio = node;
+                    } else {
+                        node.setProxNode(aux);
+                        aux.setAntNode(node);
+                    }
                 }
             }
         }
