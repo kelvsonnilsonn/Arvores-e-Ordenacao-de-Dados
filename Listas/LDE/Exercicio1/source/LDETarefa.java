@@ -101,6 +101,23 @@ public class LDETarefa {
         }
     }
 
+    public void ExibirPorPrioridade(int priority){
+
+        int tasksQtd = 0;
+
+        for(LDENode aux = this.inicio; aux != null; aux = aux.getProxNode()){
+            if(aux.getInfo().GetTaskPriority() == priority+1){
+                System.out.printf("Há %d tasks de iguais prioridades!", tasksQtd);
+                break;
+            } else {
+                if(aux.getInfo().GetTaskPriority()  == priority){
+                    System.out.printf("Task : %s ; - ; Prioridade : %d", aux.getInfo().getTaskName(), aux.getInfo().GetTaskPriority());
+                    tasksQtd++;
+                }
+            }
+        }
+    }
+
 
     public LDENode buscar(Tarefa taf){
         int qtdTasksFinder = 0;
