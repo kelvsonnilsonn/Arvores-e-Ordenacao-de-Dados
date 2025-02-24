@@ -69,6 +69,38 @@ public class LDETarefa {
         this.qtd--;
     }
 
+    public void RemoveByDescription(String Description){
+        if(isEmpty()){
+            System.out.println("A lista está vazia.");
+        } else {
+            for(LDENode aux = this.inicio; aux != null; aux = aux.getProxNode()){
+                if(aux.getInfo().equals(Description)){
+                    if(this.inicio == this.fim){
+                        this.inicio = null;
+                        this.fim = null;
+                    } else if(aux == this.inicio){
+                        this.inicio = aux.getProxNode();
+                        
+                        aux.getProxNode().setAntNode(null);
+                        aux.setProxNode(null);
+
+                    } else if (aux == this.fim){
+                        this.fim = aux.getAntNode();
+
+                        this.fim.setProxNode(null);
+                        aux.setAntNode(null);
+
+                    } else {
+                        aux.getAntNode().setProxNode(aux.getProxNode());
+                        aux.getProxNode().setAntNode(aux.getAntNode());
+                    }
+                    this.qtd--;
+                    break;
+                }
+            }
+        }
+    }
+
 
     public LDENode buscar(Tarefa taf){
         int qtdTasksFinder = 0;
