@@ -118,6 +118,12 @@ public class LDETarefa {
         }
     }
 
+    public void Exibir(){
+        for(LDENode aux = this.inicio; aux != null; aux = aux.getProxNode()){
+            System.out.printf("Task : %s ; - ; Prioridade : %d", aux.getInfo().getTaskName(), aux.getInfo().GetTaskPriority());
+        }
+    }
+
 
     public LDENode buscar(Tarefa taf){
         int qtdTasksFinder = 0;
