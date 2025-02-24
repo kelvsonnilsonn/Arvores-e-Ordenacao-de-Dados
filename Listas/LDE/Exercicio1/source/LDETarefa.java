@@ -22,7 +22,7 @@ public class LDETarefa {
         LDENode aux;
 
         node = new LDENode(taf);
-        
+
         if(isEmpty()){
 
             this.inicio = node;
@@ -37,7 +37,7 @@ public class LDETarefa {
                 this.fim = node;
                 this.fim.setProxNode(null);
             } else {
-                if (aux.getInfo().GetTaskPriority() == taf.GetTaskPriority()){
+                if (aux.getInfo().getTaskPriority() == taf.getTaskPriority()){
                     aux.setProxNode(node);
                 } else {
                     if(aux.getAntNode() == this.inicio){
@@ -80,7 +80,7 @@ public class LDETarefa {
                         this.fim = null;
                     } else if(aux == this.inicio){
                         this.inicio = aux.getProxNode();
-                        
+
                         aux.getProxNode().setAntNode(null);
                         aux.setProxNode(null);
 
@@ -106,12 +106,12 @@ public class LDETarefa {
         int tasksQtd = 0;
 
         for(LDENode aux = this.inicio; aux != null; aux = aux.getProxNode()){
-            if(aux.getInfo().GetTaskPriority() == priority+1){
+            if(aux.getInfo().getTaskPriority() == priority+1){
                 System.out.printf("Há %d tasks de iguais prioridades!", tasksQtd);
                 break;
             } else {
-                if(aux.getInfo().GetTaskPriority()  == priority){
-                    System.out.printf("Task : %s ; - ; Prioridade : %d", aux.getInfo().getTaskName(), aux.getInfo().GetTaskPriority());
+                if(aux.getInfo().getTaskPriority()  == priority){
+                    System.out.printf("Task : %s ; - ; Prioridade : %d", aux.getInfo().getTaskName(), aux.getInfo().getTaskPriority());
                     tasksQtd++;
                 }
             }
@@ -120,7 +120,7 @@ public class LDETarefa {
 
     public void Exibir(){
         for(LDENode aux = this.inicio; aux != null; aux = aux.getProxNode()){
-            System.out.printf("Task : %s ; - ; Prioridade : %d", aux.getInfo().getTaskName(), aux.getInfo().GetTaskPriority());
+            System.out.printf("Task : %s ; - ; Prioridade : %d", aux.getInfo().getTaskName(), aux.getInfo().getTaskPriority());
         }
     }
 
@@ -134,22 +134,47 @@ public class LDETarefa {
                 return aux;
             }
         }
-        
+
         if(aux == null){
             System.out.println("Não foi encontrado a tarefa buscada.");
         }
-        
+
         return aux;
     }
 
     public LDENode buscarPrioridade(Tarefa taf){
         LDENode aux;
         for(aux = this.inicio; aux != null; aux = aux.getProxNode()){
-            if(taf.GetTaskPriority() <= aux.getInfo().GetTaskPriority()){
+            if(taf.getTaskPriority() <= aux.getInfo().getTaskPriority()){
                 return aux;
             }
         }
 
         return aux;
+    }
+
+    public LDENode buscarPorDescricao(String Description){
+        if(isEmpty()){
+            System.out.println("Lista vazia.");
+            return null;
+        } else {
+            for(LDENode aux = this.inicio; aux != null; aux = aux.getProxNode()){
+                if(aux.getInfo().getTaskName().equals(Description)){
+                    return aux;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void ChangePriority(String Description, int newPriority){
+        LDENode novo = buscarPorDescricao(Description);
+
+        if(novo != null){
+            RemoveByDescription(novo.getInfo().getTaskName());
+            novo.getInfo().setTaskPriority(newPriority);
+            Tarefa atualizado = new Tarefa(novo.getInfo().getTaskName(), novo.getInfo().getTaskPriority());
+            inserir(atualizado);
+        }
     }
 }

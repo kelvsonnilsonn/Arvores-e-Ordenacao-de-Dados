@@ -12,6 +12,6 @@ public class Tarefa {
     public String getTaskName(){ return this.TaskName; }
     public void setTaskName(String name) { this.TaskName = name; }
 
-    public int GetTaskPriority() { return this.priority; }
+    public int getTaskPriority() { return this.priority; }
     public void setTaskPriority(int newPriority) { this.priority = newPriority; }
 }
