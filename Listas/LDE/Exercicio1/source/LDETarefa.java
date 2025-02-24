@@ -74,7 +74,7 @@ public class LDETarefa {
             System.out.println("A lista está vazia.");
         } else {
             for(LDENode aux = this.inicio; aux != null; aux = aux.getProxNode()){
-                if(aux.getInfo().equals(Description)){
+                if(aux.getInfo().getTaskName().equals(Description)){
                     if(this.inicio == this.fim){
                         this.inicio = null;
                         this.fim = null;
