@@ -17,4 +17,5 @@ class ABBNode <T extends Comparable <T>> { // Esse "extends Comparable <T>" é p
 
     ABBNode<T> getRightNode(){ return this.right; }
     void setRightNode(ABBNode<T> rightNode){ this.right = rightNode;}
+
 }
