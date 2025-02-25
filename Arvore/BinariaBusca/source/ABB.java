@@ -33,8 +33,10 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
         }
     }
 
+
     private ABBNode<T> buscar(T value){
         point = this.root;
+
         if(isEmpty()){
             return null;
         } else {
@@ -57,4 +59,33 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
             }
         }
     }
+
+
+    // private ABBNode<T> buscarPaiFilho(T value){
+    //     ABBNode<T> pai = this.root;
+    //     ABBNode<T> filho = pai;
+
+    //     while(true){
+    //         if(pai.getValue().compareTo(value) > 0){
+    //             filho = pai.getLeftNode();
+    //             if(filho.getLeftNode() == null){
+    //                 return null;
+    //             } else {
+    //                 pai = filho;
+    //                 filho = filho.getLeftNode();
+    //             }
+    //         } else if(pai.getValue().compareTo(value) < 0){
+    //             filho = pai.getRightNode();
+    //             if(filho.getRightNode() == null){
+    //                 return null;
+    //             } else {
+    //                 pai = filho;
+    //                 filho = filho.getRightNode();
+    //             }
+    //         } else {
+    //             return filho;
+    //         }
+    //     }
+    // }
+
 }
