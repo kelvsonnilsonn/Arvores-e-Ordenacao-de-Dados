@@ -19,6 +19,8 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
                     } else{
                         point = point.getLeftNode();
                         }
+                } else if(point.getValue().compareTo(value) == 0){
+                    break;
                 } else {
                     if(point.getRightNode() == null){
                         point.setRightNode(new ABBNode<T>(value));
