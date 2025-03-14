@@ -33,6 +33,46 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
         }
     }
 
+    private ABBNode<T> removeNode (ABBNode<T> root, T value){
+        if(root != null){
+            int result = value.compareTo(root.getValue());
+            if( result == 0 ){
+                if( root.getLeftNode() == null && root.getRightNode() == null) root = null;
+                else if( root.getLeftNode() == null) root = root.getRightNode();
+                else if ( root.getRightNode() == null) root = root.getLeftNode();
+                else {
+                    ABBNode<T> pai, filho;
+                    pai = root;
+                    filho = pai.getLeftNode();
+                    if(filho.getRightNode() != null){
+                        while(filho.getRightNode() != null){
+                            pai = filho;
+                            filho = filho.getRightNode();
+                        }
+                        pai.setRightNode(filho.getLeftNode());
+                    }
+                    else {
+                        pai.setLeftNode(filho.getLeftNode());
+                    }
+                    root.setValue(filho.getValue());
+                }
+            } else if( result < 0 ){
+                root.setLeftNode(removeNode(root.getLeftNode(), value));
+            } else {
+                root.setRightNode(removeNode(root.getRightNode(), value));
+            }
+        }
+        return root;
+    }
+
+    public void remove(T value){
+        if(isEmpty()){
+            ;
+        } else {
+            this.root = this.removeNode(this.root, value);
+        }
+    }
+
 
     private ABBNode<T> buscar(T value){
         point = this.root;
