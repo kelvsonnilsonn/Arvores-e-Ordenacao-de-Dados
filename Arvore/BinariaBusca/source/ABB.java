@@ -1,6 +1,6 @@
 package BinariaBusca.source;
 
-import java.util.Stack;
+import BinariaBusca.source.StackSource.Stack;
 
 public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico - pode receber qualquer coisa.
     private ABBNode<T> root;
@@ -35,38 +35,6 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
         }
     }
 
-    private ABBNode<T> removeNode (ABBNode<T> root, T value){
-        if(root != null){
-            int result = value.compareTo(root.getValue());
-            if( result == 0 ){
-                if( root.getLeftNode() == null && root.getRightNode() == null) root = null;
-                else if( root.getLeftNode() == null) root = root.getRightNode();
-                else if ( root.getRightNode() == null) root = root.getLeftNode();
-                else {
-                    ABBNode<T> pai, filho;
-                    pai = root;
-                    filho = pai.getLeftNode();
-                    if(filho.getRightNode() != null){
-                        while(filho.getRightNode() != null){
-                            pai = filho;
-                            filho = filho.getRightNode();
-                        }
-                        pai.setRightNode(filho.getLeftNode());
-                    }
-                    else {
-                        pai.setLeftNode(filho.getLeftNode());
-                    }
-                    root.setValue(filho.getValue());
-                }
-            } else if( result < 0 ){
-                root.setLeftNode(removeNode(root.getLeftNode(), value));
-            } else {
-                root.setRightNode(removeNode(root.getRightNode(), value));
-            }
-        }
-        return root;
-    }
-
     public void remove(T value){
         if(isEmpty()){
             ;
@@ -75,7 +43,28 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
         }
     }
 
+    public void verEmOrdem(){
+        if(isEmpty()) ;
+        else percorrerEmOrdemNaoRecursiva(root);
+    }
+    
+    /////////////////////////// PRIVATE METHODS ///////////////////////////
+    
+    /////////////////////////// PRIVATE METHODS ///////////////////////////
+    
 
+    private void percorrerEmOrdemNaoRecursiva(ABBNode<T> root){
+        Stack<T> pilha = new Stack<T>();
+
+        ABBNode<T> pai = root, filho = pai.getRightNode();
+        while(filho.getRightNode() != null){
+            
+        }
+
+        
+    }
+    
+    
     private ABBNode<T> buscar(T value){
         point = this.root;
 
@@ -101,112 +90,30 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
             }
         }
     }
-
-    public void percorrerEmOrdem(ABBNode<T> root){
-        if(isEmpty()){
-            ;
-        } else {
-            Stack<ABBNode<T>> pilha = new Stack<ABBNode<T>>();
-            // ... //
+    
+    private ABBNode<T> removeNode(ABBNode<T> root, T value){
+        if(value.compareTo(root.getValue()) > 0) { root.setRightNode(removeNode(root, value)); }
+        else if(value.compareTo(root.getValue()) < 0) { root.setLeftNode(removeNode(root, value)); }
+        else {
+            if(root.getLeftNode() == null & root.getRightNode() == null) { root = null; }
+            else if(root.getLeftNode() == null) { root = root.getRightNode(); }
+            else if(root.getRightNode() == null) { root = root.getLeftNode(); }
+            else {
+                ABBNode<T> pai = root;
+                ABBNode<T> filho = pai.getLeftNode(); // Sempre começamos a buscar o maior na esquerda!
+    
+                if(filho.getRightNode() != null){
+                    while(filho.getRightNode() != null){
+                        pai = filho;
+                        filho = filho.getRightNode();
+                    }
+                    pai.setRightNode(filho.getLeftNode());
+                } else {
+                    pai.setLeftNode(filho.getLeftNode());
+                }
+                root.setValue(filho.getValue());
+            }
         }
+        return root;
     }
-
-    // public void remove2(T value){
-    //     if(isEmpty()){
-    //         ;
-    //     } else {
-    //         this.root = removeNode(this.root, value);
-    //     }
-    // }
-
-    // private ABBNode<T> removeNode2(ABBNode<T> r, T value){
-    //     if(r != null){
-    //         if(value.compareTo(r.getValue()) < 0){
-    //             r.setLeftNode(removeNode(r, value));
-    //         } else if(value.compareTo(r.getValue()) > 0){
-    //             r.setRightNode(removeNode(r, value));
-    //         } else {
-    //             if(r.getLeftNode() == null && r.getRightNode() == null) r = null;
-    //             else if(r.getRightNode() == null) r = r.getLeftNode();
-    //             else if(r.getLeftNode() == null) r = r.getRightNode();
-    //             else {
-    //                 ABBNode<T> pai, filho;
-    //                 pai = r;
-    //                 filho = pai.getLeftNode();
-    //                 if(filho.getRightNode() != null){
-    //                     while(filho.getRightNode() != null){
-    //                         pai = filho;
-    //                         filho = filho.getRightNode();
-    //                     }
-    //                     pai.setRightNode(filho.getLeftNode());
-    //                 } else {
-    //                     pai.setLeftNode(filho.getLeftNode());
-    //                 }
-    //                 root.setValue(filho.getValue());
-    //             }
-    //         }
-    //     }
-    //     return r;
-    // }
-
-
-    // private ABBNode<T> buscarPaiFilho(T value){
-    //     ABBNode<T> pai = this.root;
-    //     ABBNode<T> filho = pai;
-
-    //     while(true){
-    //         if(pai.getValue().compareTo(value) > 0){
-    //             filho = pai.getLeftNode();
-    //             if(filho.getLeftNode() == null){
-    //                 return null;
-    //             } else {
-    //                 pai = filho;
-    //                 filho = filho.getLeftNode();
-    //             }
-    //         } else if(pai.getValue().compareTo(value) < 0){
-    //             filho = pai.getRightNode();
-    //             if(filho.getRightNode() == null){
-    //                 return null;
-    //             } else {
-    //                 pai = filho;
-    //                 filho = filho.getRightNode();
-    //             }
-    //         } else {
-    //             return filho;
-    //         }
-    //     }
-    // }
-
-    // private ABBNode<T> menorValor() {
-    //     ABBNode<T> menorNode = root;
-    //     if(isEmpty()){
-    //         ;
-    //     } else {
-    //         while(menorNode.getLeftNode() != null){
-    //             menorNode = menorNode.getLeftNode();
-    //         }
-    //     }
-    //     return menorNode;
-    // }
-
-    // private ABBNode<T> maiorValor(){
-    //     ABBNode<T> maiorNode = root;
-    //     if(isEmpty()){
-    //         ;
-    //     } else {
-    //         while(maiorNode.getRightNode() != null){
-    //             maiorNode = maiorNode.getRightNode();
-    //         }
-    //     }
-    //     return maiorNode;
-    // }
-
-    // public void exibirMenorValor(){
-    //     System.out.printf("O menor valor: %d", menorValor().getValue());
-    // }
-
-    // public void exibirMaiorValor(){
-    //     System.out.printf("O maior valor: %d", maiorValor().getValue());
-    // }
-
 }

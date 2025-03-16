@@ -1,20 +1,22 @@
 package BinariaBusca.source.QueueSource;
 
+import BinariaBusca.source.StructNodeSource.Node;
+
 public class Queue <T> {
-    private QueueNode <T> head, tail;
+    private Node <T> head, tail;
     private int qtd;
 
     public boolean isEmpty(){ return qtd == 0; }
 
     public void put(T info){
-        QueueNode <T> QueueNode = new QueueNode<T>(info);
+        Node <T> Node = new Node<T>(info);
 
         if(isEmpty()){
-            this.head = QueueNode;
+            this.head = Node;
         } else {
-            this.tail.setNextNode(QueueNode);
+            this.tail.setNextNode(Node);
         }
-        this.tail = QueueNode;
+        this.tail = Node;
         this.qtd++;
     }
 
