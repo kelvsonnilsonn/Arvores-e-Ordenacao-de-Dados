@@ -2,7 +2,7 @@ package BinariaBusca.source.QueueSource;
 
 import BinariaBusca.source.StructNodeSource.Node;
 
-public class Queue <T> {
+public class Queue <T>{
     private Node <T> head, tail;
     private int qtd;
 
@@ -35,5 +35,9 @@ public class Queue <T> {
         this.qtd--;
         return value;
     }
+
+    public T getHead() { return this.head.getInfo(); }
+    
+    public int length() { return this.qtd; }
 }
 
