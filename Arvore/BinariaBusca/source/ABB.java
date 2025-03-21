@@ -6,9 +6,9 @@ import BinariaBusca.source.QueueSource.Queue;
 public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico - pode receber qualquer coisa.
     private ABBNode<T> root;
     private ABBNode<T> point;
-
+    
     public boolean isEmpty(){ return (root == null); }
-
+    
     public void inserir(T value){
         if(isEmpty()){
             root = new ABBNode<T>(value);
