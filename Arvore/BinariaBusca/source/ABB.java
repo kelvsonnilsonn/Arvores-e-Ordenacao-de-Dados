@@ -1,6 +1,7 @@
 package BinariaBusca.source;
 
 import BinariaBusca.source.StackSource.Stack;
+import BinariaBusca.source.QueueSource.Queue;
 
 public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico - pode receber qualquer coisa.
     private ABBNode<T> root;
@@ -47,11 +48,51 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
         if(isEmpty()) ;
         else percorrerEmOrdemNaoRecursiva(root);
     }
+
+    public void verEmNivel(){
+        if(isEmpty()) ;
+        else percorrerEmNivel(this.root);
+    }
+
+    public void menorValor(){
+        System.out.println(menorValorDaArvore(this.root));
+    }
+
+    public void maiorValor(){
+        System.out.println(maiorValorDaArvore(this.root));
+    }
     
     /////////////////////////// PRIVATE METHODS ///////////////////////////
     
     /////////////////////////// PRIVATE METHODS ///////////////////////////
     
+    private ABBNode<T> percorrerEmNivel(ABBNode<T> r){
+        Queue<T> fila = new Queue<T>();
+        fila.put(r.getValue());
+
+        return r;
+    }
+
+    private T menorValorDaArvore(ABBNode<T> r){
+        
+        T min = r.getValue();
+        for(; r != null; r = r.getLeftNode()){
+            min = r.getValue();
+        }
+
+        return min;
+    }
+
+    private T maiorValorDaArvore(ABBNode<T> r){
+        
+        T max = r.getValue();
+        for(; r != null; r = r.getRightNode()){
+            max = r.getValue();
+        }
+
+        return max;
+    }
+
 
     private void percorrerEmOrdemNaoRecursiva(ABBNode<T> root){ // esquerda; adiciona; direita
         Stack<ABBNode<T>> pilha = new Stack<ABBNode<T>>();
