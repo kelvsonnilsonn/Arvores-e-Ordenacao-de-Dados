@@ -1,6 +1,7 @@
 package Empresa.source.ABB;
 
 import Empresa.source.Produto;
+import Empresa.source.ABB.Estruturas.Stack;
 
 public class ABB {
     private StoreABBNode<Produto> root;
@@ -29,6 +30,32 @@ public class ABB {
                     }
                 }
             }
+        }
+    }
+
+    public void exibirProdutos(){
+        if(isEmpty()) ; 
+        else passeioEmOrdem();
+    }
+
+
+    ////////////////////////// Métodos PRIVADOS //////////////////////////
+
+
+    private void passeioEmOrdem(){
+        Stack<StoreABBNode<Produto>> pilha = new Stack<StoreABBNode<Produto>>();
+        StoreABBNode<Produto> aux = this.root;
+        
+        pilha.push(aux);
+
+        while(pilha.isEmpty() != true || aux != null){
+            while(aux.getLeftNode() != null){
+                aux = aux.getLeftNode();
+                pilha.push(aux);
+            }
+            aux = pilha.pop();
+            System.out.println(aux.getProduto());
+            aux = aux.getRightNode();
         }
     }
 

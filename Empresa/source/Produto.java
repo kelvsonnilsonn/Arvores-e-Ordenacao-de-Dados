@@ -35,4 +35,11 @@ public class Produto implements Comparable<Produto>{
     public int compareTo(Produto outro) {
         return this.codigo.compareTo(outro.codigo);
     }
+
+    @Override
+    public String toString(){
+        return String.format(
+                "ID: %s\nDescricao: %s\nFornecedor: %s\nPreco: %.2f\nQuantidade: %d", 
+                this.codigo, this.descricao, this.fornecedor, this.preco, this.qtd);
+    }
 }
