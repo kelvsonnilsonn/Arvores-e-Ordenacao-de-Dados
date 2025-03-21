@@ -261,4 +261,28 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
         }
         return count;
     }
+
+    private int contadorDeNosNaoTerminaisNaoRecursivo(ABBNode<T> r){
+        int count = 0;
+        if(r != null){
+            Queue<ABBNode<T>> fila = new Queue<ABBNode<T>>();
+            ABBNode<T> aux;
+
+            fila.put(r);
+
+            while(fila.isEmpty() != true){
+                aux = fila.dequeue();
+
+                if(aux.getLeftNode() != null || aux.getRightNode() != null) count++;
+
+                if(aux.getLeftNode() != null){
+                    fila.put(aux.getLeftNode());
+                }
+                if(aux.getRightNode() != null){
+                    fila.put(aux.getRightNode());
+                }
+            }
+        }
+        return count;
+    }
 }
