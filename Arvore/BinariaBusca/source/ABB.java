@@ -53,8 +53,21 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
     /////////////////////////// PRIVATE METHODS ///////////////////////////
     
 
-    private void percorrerEmOrdemNaoRecursiva(ABBNode<T> root){
-        ;
+    private void percorrerEmOrdemNaoRecursiva(ABBNode<T> root){ // esquerda; adiciona; direita
+        Stack<ABBNode<T>> pilha = new Stack<ABBNode<T>>();
+
+        ABBNode<T> aux = root;
+
+        pilha.push(aux);
+
+        while(pilha.isEmpty() != true || aux != null){
+            for(; aux.getLeftNode() != null; aux = aux.getLeftNode()){
+                pilha.push(aux);
+            }
+            aux = pilha.pop();
+            System.out.println(aux.getValue());
+            aux = aux.getRightNode();
+        }
     }
     
     
