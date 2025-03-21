@@ -3,7 +3,7 @@ package Empresa.source.ABB;
 import Empresa.source.Produto;
 import Empresa.source.ABB.Estruturas.Stack;
 
-public class ABB {
+public class ABB<T> {
     private StoreABBNode<Produto> root;
 
     public boolean isEmpty() { return root == null; }
@@ -36,6 +36,15 @@ public class ABB {
     public void exibirProdutos(){
         if(isEmpty()) ; 
         else passeioEmOrdem();
+    }
+
+    public void buscarProduto(Produto produto){
+        Produto resultado = buscar(produto).getProduto();
+        if(resultado != null){
+            System.out.print(resultado);
+        } else {
+            System.out.print("Produto não encontrado.");
+        }
     }
 
 
