@@ -65,7 +65,14 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
     public void contarNos(){
         System.out.println(contadorRecursivoDeNos(this.root));
     }
-    
+
+    public void contarNosNaoRecursivo(){
+        System.out.println(contadorDeNosSemRecursividade(this.root));
+    }
+
+    public void contarFolhas(){
+        System.out.println(contadorRecursivoDeFolhas(this.root));
+    }
     /////////////////////////// PRIVATE METHODS ///////////////////////////
     
     /////////////////////////// PRIVATE METHODS ///////////////////////////
@@ -186,7 +193,7 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
         return 0;
     }
 
-    private int contadorRecursivoDeNosSemRecursividade(ABBNode<T> root){
+    private int contadorDeNosSemRecursividade(ABBNode<T> root){
         int count = 0;
         Queue<ABBNode<T>> fila = new Queue<ABBNode<T>>();
 
@@ -194,7 +201,7 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
 
         fila.put(root);
         count++;
-        while(isEmpty() != true){
+        while(fila.isEmpty() != true){
             aux = fila.dequeue();
             if(aux.getLeftNode() != null){
                 count++;
@@ -204,6 +211,53 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
                 count++;
                 fila.put(aux.getRightNode());
             }
+        }
+        return count;
+    }
+
+    private int contadorRecursivoDeFolhas(ABBNode<T> r){
+        int count = 0;
+        if(r != null){
+            if(r.getLeftNode() == null && r.getRightNode() == null){
+                count++;
+            } else {
+                count += contadorRecursivoDeFolhas(r.getLeftNode()) + contadorRecursivoDeFolhas(r.getRightNode());
+            }
+        }
+        return count;
+    }
+
+    private int contadorDeFolhasNaoRecursiva(ABBNode<T> r){
+        int count = 0;
+        Queue<ABBNode<T>> fila = new Queue<ABBNode<T>>();
+        ABBNode<T> aux;
+
+        fila.put(r);
+        while(fila.isEmpty() != true){
+            aux = fila.dequeue();
+            if(aux.getLeftNode() == null && aux.getRightNode() == null){
+                count++;
+            }
+
+            if(aux.getLeftNode() != null){
+                fila.put(aux.getLeftNode());
+            }
+            if(aux.getRightNode() != null){
+                fila.put(aux.getRightNode());
+            }
+        }
+
+        return count;
+    }
+
+    private int contadorDeNosNaoTerminaisRecursivo(ABBNode<T> r){
+        int count = 0;
+        if(r != null){
+            if(r.getLeftNode() != null || r.getRightNode() != null){
+                count += 1;
+            }
+
+            count += contadorDeNosNaoTerminaisRecursivo(r.getLeftNode()) + contadorDeNosNaoTerminaisRecursivo(r.getRightNode());
         }
         return count;
     }
