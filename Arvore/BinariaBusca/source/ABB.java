@@ -1,6 +1,7 @@
 package BinariaBusca.source;
 
 import BinariaBusca.source.StackSource.Stack;
+import BinariaBusca.source.QueueSource.Queue;
 
 public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico - pode receber qualquer coisa.
     private ABBNode<T> root;
@@ -47,14 +48,83 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
         if(isEmpty()) ;
         else percorrerEmOrdemNaoRecursiva(root);
     }
-    
-    /////////////////////////// PRIVATE METHODS ///////////////////////////
-    
-    /////////////////////////// PRIVATE METHODS ///////////////////////////
-    
 
-    private void percorrerEmOrdemNaoRecursiva(ABBNode<T> root){
-        ;
+    public void verEmNivel(){
+        if(isEmpty()) ;
+        else percorrerEmNivel(this.root);
+    }
+
+    public void menorValor(){
+        System.out.println(menorValorDaArvore(this.root));
+    }
+
+    public void maiorValor(){
+        System.out.println(maiorValorDaArvore(this.root));
+    }
+
+    public void contarNos(){
+        System.out.println(contadorRecursivoDeNos(this.root));
+    }
+    
+    /////////////////////////// PRIVATE METHODS ///////////////////////////
+    
+    /////////////////////////// PRIVATE METHODS ///////////////////////////
+    
+    private void percorrerEmNivel(ABBNode<T> r){
+        if(isEmpty()) ;
+        else {
+            Queue<ABBNode<T>> fila = new Queue<ABBNode<T>>();
+            ABBNode<T> aux;
+            fila.put(r);
+
+            while(isEmpty() != true){   // se refere ao root ou à fila?
+                aux = fila.dequeue();
+                if(aux.getLeftNode() != null){
+                    fila.put(aux.getLeftNode());
+                }
+                if(aux.getRightNode() != null){
+                    fila.put(aux.getRightNode());
+                }
+                System.out.println(aux.getValue());
+            }
+        }
+    }
+
+    private T menorValorDaArvore(ABBNode<T> r){
+        
+        T min = r.getValue();
+        for(; r != null; r = r.getLeftNode()){
+            min = r.getValue();
+        }
+
+        return min;
+    }
+
+    private T maiorValorDaArvore(ABBNode<T> r){
+        
+        T max = r.getValue();
+        for(; r != null; r = r.getRightNode()){
+            max = r.getValue();
+        }
+
+        return max;
+    }
+
+
+    private void percorrerEmOrdemNaoRecursiva(ABBNode<T> root){ // esquerda; adiciona; direita
+        Stack<ABBNode<T>> pilha = new Stack<ABBNode<T>>();
+
+        ABBNode<T> aux = root;
+
+        pilha.push(aux);
+
+        for(; pilha.isEmpty() != true || aux != null; aux = aux.getRightNode()){
+            for(; aux.getLeftNode() != null; aux = aux.getLeftNode()){
+                pilha.push(aux);
+            }
+            aux = pilha.pop();
+            System.out.println(aux.getValue());
+        }
     }
     
     
@@ -108,5 +178,33 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
             }
         }
         return root;
+    }
+
+    private int contadorRecursivoDeNos(ABBNode<T> root){
+        if(root != null) return 1 + contadorRecursivoDeNos(root.getLeftNode()) +
+                                    contadorRecursivoDeNos(root.getRightNode());
+        return 0;
+    }
+
+    private int contadorRecursivoDeNosSemRecursividade(ABBNode<T> root){
+        int count = 0;
+        Queue<ABBNode<T>> fila = new Queue<ABBNode<T>>();
+
+        ABBNode<T> aux;
+
+        fila.put(root);
+        count++;
+        while(isEmpty() != true){
+            aux = fila.dequeue();
+            if(aux.getLeftNode() != null){
+                count++;
+                fila.put(aux.getLeftNode());
+            }
+            if(aux.getRightNode() != null){
+                count++;
+                fila.put(aux.getRightNode());
+            }
+        }
+        return count;
     }
 }
