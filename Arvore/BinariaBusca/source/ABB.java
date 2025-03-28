@@ -78,7 +78,7 @@ public class ABB <T extends Comparable<T>>{// o <T> transforma em algo genérico
     /////////////////////////// PRIVATE METHODS ///////////////////////////
     
     private void percorrerEmNivel(ABBNode<T> r){
-        if(isEmpty()) ;
+        if(isEmpty()) return;
         else {
             Queue<ABBNode<T>> fila = new Queue<ABBNode<T>>();
             ABBNode<T> aux;
