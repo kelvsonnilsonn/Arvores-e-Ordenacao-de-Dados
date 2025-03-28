@@ -22,7 +22,7 @@ public class Aplicacao {
             System.out.print("Escolha uma opção: ");
 
             int opcao = scan.nextInt();
-            scan.nextLine(); // Consumir quebra de linha
+            scan.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -36,7 +36,7 @@ public class Aplicacao {
                     double preco = scan.nextDouble();
                     System.out.print("Quantidade: ");
                     int quantidade = scan.nextInt();
-                    scan.nextLine(); // Consumir quebra de linha
+                    scan.nextLine();
 
                     Produto novoProduto = new Produto(codigo, descricao, fornecedor, preco, quantidade);
                     cadastro.cadastrarProduto(novoProduto);

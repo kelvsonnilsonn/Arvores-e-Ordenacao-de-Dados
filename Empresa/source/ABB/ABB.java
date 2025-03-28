@@ -14,24 +14,7 @@ public class ABB<T> {
         if(isEmpty()) {
             root = new StoreABBNode<Produto>(node);
         } else {
-            if(buscar(node) != null) return ;
-            else {
-                StoreABBNode<Produto> aux = root;
-
-                while (true) {
-                    if(aux.getProduto().compareTo(node) > 0){
-                        if(aux.getLeftNode() == null) {
-                            aux.setLeftNode(new StoreABBNode<Produto>(node));
-                            break;
-                        } else aux = aux.getLeftNode();
-                    } else {
-                        if(aux.getRightNode() == null){
-                            aux.setRightNode(new StoreABBNode<Produto>(node));
-                            break;
-                        } else aux = aux.getRightNode();
-                    }
-                }
-            }
+            inserirNode(node);
         }
     }
 
@@ -59,7 +42,7 @@ public class ABB<T> {
     public void buscarProduto(Produto produto){
         Produto resultado = buscar(produto).getProduto();
         if(resultado != null){
-            System.out.print(resultado);
+            System.out.print("Produto encontrado:\n\n" + resultado);
         } else {
             System.out.print("Produto não encontrado.");
         }
@@ -71,7 +54,7 @@ public class ABB<T> {
             StoreABBNode<Produto> produtoAExibir = buscar(codigo);
             
             if(produtoAExibir != null){
-                System.out.println(produtoAExibir);
+                System.out.println(produtoAExibir.getProduto());
             }
         }
     }
@@ -85,6 +68,27 @@ public class ABB<T> {
 
 
     ////////////////////////// Métodos PRIVADOS //////////////////////////
+
+    private void inserirNode(Produto node){
+        if(buscar(node) != null) return ;
+        else {
+            StoreABBNode<Produto> aux = root;
+
+            while (true) {
+                if(aux.getProduto().compareTo(node) > 0){
+                    if(aux.getLeftNode() == null) {
+                        aux.setLeftNode(new StoreABBNode<Produto>(node));
+                        break;
+                    } else aux = aux.getLeftNode();
+                } else {
+                    if(aux.getRightNode() == null){
+                        aux.setRightNode(new StoreABBNode<Produto>(node));
+                        break;
+                    } else aux = aux.getRightNode();
+                }
+            }
+        }
+    }
 
     private StoreABBNode<Produto> removerProdutoDoABB(StoreABBNode<Produto> root, String value) {
         if (root == null) return null; // Proteção contra NullPointerException
@@ -164,10 +168,10 @@ public class ABB<T> {
             while(true){
                 if(aux.getProduto().getCodigo().compareTo(codigo) > 0){
                     if(aux.getLeftNode() == null) return null;
-                    aux = aux.getRightNode();
+                    aux = aux.getLeftNode();
                 } else if(aux.getProduto().getCodigo().compareTo(codigo) < 0){
                     if(aux.getRightNode() == null) return null;
-                    aux = aux.getLeftNode();
+                    aux = aux.getRightNode();
                 } else {
                     return aux;
                 }
